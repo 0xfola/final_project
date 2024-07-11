@@ -1,11 +1,11 @@
-package main
+package util
 
 import (
     "fmt"
     "github.com/skip2/go-qrcode"
 )
 
-func main() {
+func GenerateQR() {
     ipfsHash := "QmbTq7zHWX3hDez4iqEqJBna3RQwHZuymNuY8jFRVjUZ1J" // Replace with your IPFS hash
 
     // Generate QR code

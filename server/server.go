@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
     "context"
@@ -16,7 +16,7 @@ type StoreStudentDataRequest struct {
     Tag            string `json:"tag"`
 }
 
-func main() {
+func HttpServer() {
     r := gin.Default()
 
     r.POST("/store_student_data", func(c *gin.Context) {

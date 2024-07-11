@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
     "crypto/aes"
@@ -13,7 +13,7 @@ import (
 )
 
 // encrypt encrypts data using AES-GCM with the given passphrase
-func encrypt(data []byte, passphrase string) (string, string, string) {
+func Encrypt(data []byte, passphrase string) (string, string, string) {
     key := []byte(passphrase)
     block, err := aes.NewCipher(key)
     if err != nil {
@@ -39,7 +39,7 @@ func main() {
     passphrase := "Sixteen byte key"
 
     // Encrypt student data
-    ciphertext, nonce, tag := encrypt(studentData, passphrase)
+    ciphertext, nonce, tag := Encrypt(studentData, passphrase)
     fmt.Println("Ciphertext:", ciphertext)
     fmt.Println("Nonce:", nonce)
     fmt.Println("Tag:", tag)
