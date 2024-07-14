@@ -23,10 +23,10 @@ type StoreStudentDataRequest struct {
 	Tag            string `json:"tag"`
 }
 
-func HttpServer() {
+func main() {
 	r := gin.Default()
 
-	r.POST("/store_student_data", func(c *gin.Context) {
+	r.POST("/student", func(c *gin.Context) {
 		var req StoreStudentDataRequest
 		if err := c.ShouldBindJSON(&req); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -46,7 +46,7 @@ func HttpServer() {
 		c.JSON(http.StatusOK, gin.H{"message": "Student data stored successfully.", "txHash": txHash})
 	})
 
-	r.GET("/get_student_data/:studentAddress", func(c *gin.Context) {
+	r.GET("/student/:studentAddress", func(c *gin.Context) {
 		studentAddress := c.Param("studentAddress")
 
 		// Connect to Solana client
