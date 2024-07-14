@@ -1,10 +1,7 @@
 package main
 
 import (
-	"final-project/util"
-	"strings"
-
-	shell "github.com/ipfs/go-ipfs-api"
+	"github.com/gin-contrib/cors"
 
 	"context"
 	"fmt"
@@ -32,6 +29,9 @@ type StoreStudentDataRequest struct {
 
 func main() {
 	r := gin.Default()
+
+	// cors
+	r.Use(cors.Default())
 
 	r.POST("/student", func(c *gin.Context) {
 		var req StoreStudentDataRequest
@@ -70,29 +70,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"studentAddress": studentAddress, "accountInfo": accountInfo})
 	})
 
-	if err := r.Run(":3000"); err != nil {
+	if err := r.Run(":8000"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
-}
-
-func test() {
-	studentData := []byte(`{"name": "John Doe", "student_id": "12345", "image": "base64_encoded_image_data"}`)
-	passphrase := "Sixteen byte key"
-
-	// Encrypt student data
-	ciphertext, nonce, tag := util.Encrypt(studentData, passphrase)
-	fmt.Println("Ciphertext:", ciphertext)
-	fmt.Println("Nonce:", nonce)
-	fmt.Println("Tag:", tag)
-
-	// Connect to IPFS
-	sh := shell.NewShell("localhost:5001")
-
-	// Upload encrypted data to IPFS
-	cid, err := sh.Add(strings.NewReader(ciphertext))
-	if err != nil {
-		fmt.Println("Error uploading to IPFS:", err)
-		return
-	}
-	fmt.Println("IPFS CID:", cid)
 }
