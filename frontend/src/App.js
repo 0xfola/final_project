@@ -10,7 +10,7 @@ function App() {
     e.preventDefault();
     const studentAddress = e.target.studentAddress.value;
     const response = await axios.get(
-      `http://localhost:3000/get_student_data/${studentAddress}`,
+      `http://localhost:3000/student/${studentAddress}`,
     );
     setStudentData(response.data);
     setQrValue(response.data.ipfsHash);
