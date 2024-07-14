@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/blocto/solana-go-sdk/client"
+	"github.com/blocto/solana-go-sdk/rpc"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,9 +31,7 @@ func HttpServer() {
 		// Connect to Solana client
 		cli := client.NewClient(rpc.DevnetRPCEndpoint)
 
-		// Example of sending a transaction
-		// Note: Implement the actual logic to store student data on Solana
-		txHash, err := cli.GetRecentBlockhash(context.Background())
+		txHash, err := cli.GetLatestBlockhash(context.Background())
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
@@ -47,7 +47,6 @@ func HttpServer() {
 		// Connect to Solana client
 		cli := client.NewClient(rpc.DevnetRPCEndpoint)
 
-		// Example of retrieving account data
 		// Note: Implement the actual logic to retrieve student data from Solana
 		accountInfo, err := cli.GetAccountInfo(context.Background(), studentAddress)
 		if err != nil {
