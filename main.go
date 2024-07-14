@@ -16,6 +16,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type Student struct {
+	ID    string
+	Name  string
+	Level string
+	Image string
+}
+
 type StoreStudentDataRequest struct {
 	StudentAddress string `json:"studentAddress"`
 	IpfsHash       string `json:"ipfsHash"`
@@ -69,7 +76,7 @@ func main() {
 }
 
 func test() {
-	studentData := []byte(`{"name": "John Doe", "age": 20, "student_id": "12345", "image": "base64_encoded_image_data"}`)
+	studentData := []byte(`{"name": "John Doe", "student_id": "12345", "image": "base64_encoded_image_data"}`)
 	passphrase := "Sixteen byte key"
 
 	// Encrypt student data
